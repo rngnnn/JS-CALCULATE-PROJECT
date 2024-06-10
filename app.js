@@ -6,12 +6,40 @@ const current=document.querySelector(".current-display")
 const equal=document.querySelector(".equal")
 
 
-num.forEach((Number)=>{
+let altekranText=""
+let ustekranText=""
 
-Number.onclick=()=>{
-    altekranText=number.textContent
+num.forEach((number)=>{
+
+number.onclick=()=>{
+    // altekranText=number.textContent
+    // current.textContent=altekranText
+
+    ekranaHazirlik(number.textContent)
+}
+
+})
+
+//!EKRANA HAZIRLIK ISLEMLERI
+
+const ekranaHazirlik=(num)=>{
+
+altekranText=" "
+altekranText+=num
+updateEkran()
+
+
+
+}
+
+//!EKRANDA GOSTERME ISLEMI
+
+const updateEkran=()=>{
     current.textContent=altekranText
-
+}
+operator.forEach((op)=>{
+op.onclick=()=>{
+    
 }
 
 })
