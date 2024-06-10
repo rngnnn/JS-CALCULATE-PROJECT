@@ -39,7 +39,7 @@ const updateEkran=()=>{
 }
 operator.forEach((op)=>{
 op.onclick=()=>{
-    
+    islem=op.textContent
 }
 
 })
