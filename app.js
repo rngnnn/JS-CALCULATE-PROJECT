@@ -75,3 +75,12 @@ const hesapla=()=>{
     ustekranText=""
     islem="";
 }
+
+ac.onclick=()=>{
+islem=""
+altekranText=""
+ustekranText=""
+updateEkran()
+
+
+}
