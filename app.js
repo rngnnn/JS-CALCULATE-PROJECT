@@ -5,7 +5,6 @@ const current=document.querySelector(".current-display")
 const equal=document.querySelector(".equal")
 const ac=document.querySelector(".ac")
 
-
 let altekranText=""
 let ustekranText=""
 let islem=""
@@ -21,8 +20,31 @@ num.forEach((number)=>{
 })
 
 //!EKRANA HAZIRLIK İŞLEMLERİ
-const ekranaHazirlik=(num)=>{ 
+const ekranaHazirlik=(num)=>{     
+
+
+    
+
+    // ? kullanıcı 0 girerse, sonrasında 0 ve . dışında bir sayı girerse, ekranda sadece girilen yeni sayı (0 iptal olsun) gözüksün
+    if (altekranText==="0" && num !=="0" && num!=="."){        
+        altekranText=num
+        updateEkran()
+        return;
+        
+    }
  
+    //? kullanıcı ilk başta 0 girer ardından tekrar 0 girerse, girilmesin, tek 0 döndürsün
+    if (altekranText=="0" && num=="0") return
+
+    //? kullanıcı herhangi bir yerde . girmişken, tekrar nokta girmeye kalkarsa giremesin
+
+    if (num==="." && altekranText.includes(".")) return
+
+    //? kullanıcı 10 haneden sonra girmesin
+
+    if (altekranText.length>10) return
+
+
     altekranText +=num
     updateEkran()
 
@@ -32,15 +54,22 @@ const ekranaHazirlik=(num)=>{
   //!EKRANDA GÖSTERME İŞLEMLERİ
 const updateEkran=()=>{
     current.textContent=altekranText
-    if(islem){
-    previous.textContent=ustekranText + islem
-}else{
-    previous.textContent=""
-}
+    if (islem){
+          previous.textContent=`${ustekranText} ${islem}`
+    }
+    else{
+        previous.textContent=""
+    }
+
 }
 
 operator.forEach((op)=>{
     op.onclick=()=>{
+
+        if (altekranText==="") return
+
+        if (altekranText && ustekranText) hesapla()
+
         islem=op.textContent
         ustekranText=altekranText
         altekranText=""
@@ -49,38 +78,39 @@ operator.forEach((op)=>{
 })
 
 
+
 equal.onclick=()=>{
-    hesapla()
+    hesapla()    
     updateEkran()
+    altekranText=""
 }
 
 const hesapla=()=>{
-    switch(islem){
+    switch (islem){
         case "+":
-            sonuc=Number(ustekranText)+Number(altekranText);
+            sonuc=Number(ustekranText) + Number(altekranText);
         break;
-        case"-":
-        sonuc=ustekranText-altekranText;
-        break
-        case"x":
-        sonuc=ustekranText*altekranText;
+        case "-":
+            sonuc=ustekranText - altekranText;
         break;
-        case"/":
-        sonuc=ustekranText/altekranText;
+        case "x":
+            sonuc=ustekranText * altekranText;
+        break;
+        case "÷":
+            sonuc=ustekranText / altekranText;
+        break;
         default:
             break;
     }
-
     altekranText=sonuc;
     ustekranText=""
     islem="";
+
 }
 
 ac.onclick=()=>{
-islem=""
-altekranText=""
-ustekranText=""
-updateEkran()
-
-
+    islem=""
+    altekranText=""
+    ustekranText=""
+    updateEkran()
 }
