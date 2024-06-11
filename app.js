@@ -4,6 +4,8 @@ const previous=document.querySelector(".previous-display")
 const current=document.querySelector(".current-display")
 const equal=document.querySelector(".equal")
 const ac=document.querySelector(".ac")
+const percent=document.querySelector(".percent")
+const pm=document.querySelector(".pm")
 
 let altekranText=""
 let ustekranText=""
@@ -41,8 +43,15 @@ const ekranaHazirlik=(num)=>{
     if (num==="." && altekranText.includes(".")) return
 
     //? kullanıcı 10 haneden sonra girmesin
+    // if (altekranText.length>9) return
 
-    if (altekranText.length>10) return
+    //? kullanıcı 10dan fazla girerse exponential olarak bir gösterim yapsın
+    // const deger=(altekranText.length>10) ? altekranText.length.toExponential() : altekranText
+    // altekranText=deger
+
+    //  const deger=(altekranText.length>10) ? altekranText="error" : altekranText
+    // altekranText=deger
+
 
 
     altekranText +=num
@@ -112,5 +121,15 @@ ac.onclick=()=>{
     islem=""
     altekranText=""
     ustekranText=""
+    updateEkran()
+}
+
+percent.onclick=()=>{
+    altekranText= altekranText/100
+    updateEkran()
+}
+
+pm.onclick=()=>{
+    altekranText=altekranText*-1
     updateEkran()
 }
